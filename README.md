@@ -6,3 +6,7 @@ place it into a folder containing two others folder one named src and one named 
 * src will contains your sources
 
 the result of a build is a file call run infide the makefile folder
+
+you can crosscompiler for windows by using
+make windows
+the resulting file will be called run.exe
