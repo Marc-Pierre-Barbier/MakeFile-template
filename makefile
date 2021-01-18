@@ -1,3 +1,4 @@
+COMPILER = g++
 COMPILE_FLAG = -c
 LD_FLAG = -o
 OBJDIR=./objs/
@@ -11,10 +12,10 @@ build :
 	-@rm run
 	@echo ""
 	@echo "building :"
-	@cd objs && for src in ${SRCS}; do echo gcc ${COMPILE_FLAG} ../$$src &&gcc ${COMPILE_FLAG} ../$$src;	done;
+	@cd objs && for src in ${SRCS}; do echo ${COMPILER} ${COMPILE_FLAG} ../$$src && ${COMPILER} ${COMPILE_FLAG} ../$$src;	done;
 
 link:
-	gcc objs/* ${LD_FLAG} run
+	${COMPILER} objs/* ${LD_FLAG} run
 
 
 clean :
