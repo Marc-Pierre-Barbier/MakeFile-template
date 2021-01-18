@@ -1,11 +1,19 @@
 COMPILER = g++
+WINDOWS_COMPILE = x86_64-w64-mingw32-g++
+WINDOWS_LD_FLAG = --static
 COMPILE_FLAG = -c
-LD_FLAG = -o
+LD_FLAG = -Wall -o
 OBJDIR=./objs/
 SRC=./src/
 SRCS=$(shell ls src/* | grep "\.c")
 
 ALL : build link clean
+windows : winswitch build winlink clean
+	
+winswitch : 
+	echo "building"
+	$(eval COMPILER = $(WINDOWS_COMPILE))
+	$(eval LD_FLAG = $(WINDOWS_LD_FLAG) $(LD_FLAG) )
 
 build :
 	mkdir -p ${OBJDIR}
@@ -17,6 +25,12 @@ build :
 link:
 	${COMPILER} objs/* ${LD_FLAG} run
 
+winlink:
+	-rm run.exe
+	${COMPILER} objs/* ${LD_FLAG} run.exe
+
+winrun:
+	WINEDEBUG=-all wine run.exe
 
 clean :
 	@echo ""
